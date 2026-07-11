@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<meta name="generator" content="Gridea Pro 1.2.2">
+<title>[学习笔记] 缩点 / 强连通分量 | Foofish</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="/favicon.ico?v=1783781537">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="学习笔记,tarjan" />
+  <meta name="description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
+<link rel="canonical" href="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"[学习笔记] 缩点 / 强连通分量","url":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","description":"这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 \u0026hellip;","datePublished":"2026-07-12T06:10:20+08:00","dateModified":"2026-07-11T22:52:15+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","name":"[学习笔记] 缩点 / 强连通分量","position":2}]}</script>
+<meta property="og:title" content="[学习笔记] 缩点 / 强连通分量">
+<meta property="og:description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
+<meta property="og:url" content="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Foofish">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
+<meta name="twitter:title" content="[学习笔记] 缩点 / 强连通分量">
+<meta name="twitter:description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
+<meta name="twitter:image" content="/images/avatar.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
+</head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="/">
+        <img src="/images/avatar.png?v=1783781537" class="site-logo">
+        <h1 class="site-title">Foofish</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/post" class="site-nav">
+            博客
+          </a>
+        
+      
+        
+          <a href="/memos" class="site-nav">
+            闪念
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/links" class="site-nav">
+            友链
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      我回来了。
+    </div>
+    <div class="site-footer">
+      你渴望力量吗 | <a class="rss" href="/feed.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">[学习笔记] 缩点 / 强连通分量</h2>
+            <div class="post-date">2026-07-12</div>
+            
+            <div class="post-content" v-pre>
+              <p>这是针对有向图的一个概念。<em><strong>*强连通分量（scc）*</strong></em>：一个强连通分量之间的点可以相互到达。</p>
+<p>我们可以用 tarjan 算法计算一个有向图的强连通分量。</p>
+<p>tarjan 引入了两个数组，巧妙地解决了这个问题。</p>
+<p>第一个数组 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">dfn_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示时间戳，意思就是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 是 dfs 序中第几个被访问的节点。</p>
+<p>第二个数组 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>w</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">low_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示不经过父亲节点可以访问到的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">dfn</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord mathnormal">n</span></span></span></span> 的最小值。</p>
+<p>那么怎么去求强连通分量呢？</p>
+<p>我们考虑，对于一个 scc 中，我们肯定只有一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>x</mi></msub><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>w</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">dfn_x = low_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的点。而且 scc 中所有的点的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">dfn</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord mathnormal">n</span></span></span></span> 肯定都大于这个点，那么我们可以设计一个栈，每次都把栈弹到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>x</mi></msub><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>w</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">dfn_x=low_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的地方，这样的话其中的所有点肯定是属于这个scc 内部的。</p>
+<pre><code class="language-cpp">void tarjan(int u) {
+    dfn[u] = low[u] = ++cnt;
+    sta[++top] = u; vis[u] = 1;
+    instack[u] = 1;
+    for(int v : G[u]) {
+        if(!vis[v]) {
+            tarjan(v);
+            low[u] = min(low[u], low[v]);
+        } else if(instack[v]) low[u] = min(low[u], dfn[v]);
+    }
+    if(low[u] == dfn[u]) {
+        ++ss;
+        do {
+            instack[sta[top]] = 0;
+            b[ss].push_back(sta[top]);
+            own[sta[top]] = ss;
+        }while(sta[top--] != u);
+    }
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="/tag/xue-xi-bi-ji/" class="tag">
+                    学习笔记
+                  </a>
+                
+                  <a href="/tag/tarjan/" class="tag">
+                    tarjan
+                  </a>
+                
+              </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  <script>console.log("\n%c ✦ Gridea Pro v1.2.2 %c · Theme: simple v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+</html>
