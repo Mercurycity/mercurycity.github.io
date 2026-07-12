@@ -4,12 +4,12 @@
     <meta charset="utf-8" >
 
 <meta name="generator" content="Gridea Pro 1.2.2">
-<title>[学习笔记] 缩点 / 强连通分量 | Foofish</title>
+<title>[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量 | Foofish</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="/favicon.ico?v=1783781537">
+<link rel="shortcut icon" href="/favicon.ico?v=1783871005">
 <link rel="stylesheet" href="/styles/main.css">
 
 
@@ -23,9 +23,9 @@
     <meta name="keywords" content="学习笔记,tarjan" />
   <meta name="description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
 <link rel="canonical" href="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"[学习笔记] 缩点 / 强连通分量","url":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","description":"这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 \u0026hellip;","datePublished":"2026-07-12T06:10:20+08:00","dateModified":"2026-07-11T22:52:15+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","name":"[学习笔记] 缩点 / 强连通分量","position":2}]}</script>
-<meta property="og:title" content="[学习笔记] 缩点 / 强连通分量">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量","url":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","description":"这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 \u0026hellip;","datePublished":"2026-07-12T06:10:20+08:00","dateModified":"2026-07-12T23:43:23+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","name":"[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量","position":2}]}</script>
+<meta property="og:title" content="[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量">
 <meta property="og:description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
 <meta property="og:url" content="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
 <meta property="og:type" content="article">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="/images/avatar.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
-<meta name="twitter:title" content="[学习笔记] 缩点 / 强连通分量">
+<meta name="twitter:title" content="[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量">
 <meta name="twitter:description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
 <meta name="twitter:image" content="/images/avatar.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
@@ -45,7 +45,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="/">
-        <img src="/images/avatar.png?v=1783781537" class="site-logo">
+        <img src="/images/avatar.png?v=1783871005" class="site-logo">
         <h1 class="site-title">Foofish</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -125,7 +125,7 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">[学习笔记] 缩点 / 强连通分量</h2>
+            <h2 class="post-title">[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量</h2>
             <div class="post-date">2026-07-12</div>
             
             <div class="post-content" v-pre>
@@ -154,6 +154,111 @@
             own[sta[top]] = ss;
         }while(sta[top--] != u);
     }
+}
+</code></pre>
+<p>tarjan 算法，还可以用来求割点。</p>
+<p>很直观的，我们能想到，如果对于一个 dfs 树，某一个节点的子节点中有一个满足“不经过父亲能到达的节点都在父节点为根节点的子树里”的节点，那么父节点就是一个割点。</p>
+<p>那么类似于上面的 tarjan 算法，如果一个不是根节点的点（因为根节点没有父亲，判断方式不一样），他的儿子中存在一个 low 值比我 dfn 低的，那么这个点就是割点。</p>
+<p>那么对于根节点，如果我有两个及以上的儿子，那么这个点肯定是根节点，这是很显然的。</p>
+<pre><code>void tarjan(int u, bool root) {
+    dfn[u] = low[u] = ++cnt;
+    vis[u] = 1;
+    int ch = 0;
+    for(int v : G[u]) {
+        if(!vis[v]) {
+            tarjan(v, 0);
+            if(low[v] &gt;= dfn[u] &amp;&amp; !root) isg[u] = 1;
+            if(root) ++ch;
+            low[u] = min(low[u], low[v]);
+        } else low[u] = min(low[u], dfn[v]);
+    }
+    if(root &amp;&amp; ch &gt;= 2) isg[u] = 1;
+}
+</code></pre>
+<p>点双连通分量<br />
+什么叫点双连通分量呢，就是不存在割点的图。很直观的，我们只需要将割点分成图的多个部分提取就行了。</p>
+<pre><code class="language-cpp">void tarjan(int u, bool root) {
+    sta[++top] = u;
+    dfn[u] = low[u] = ++cnt;
+    vis[u] = 1;
+    int ch = 0;
+    for(int v : G[u]) {
+        if(!vis[v]) {
+            ++ch;
+            tarjan(v, 0);
+            low[u] = min(low[u], low[v]);
+            if(low[v] &gt;= dfn[u]) {
+                ++s;
+                while(sta[top + 1] != v) ds[s].push_back(sta[top--]);
+                ds[s].push_back(u);
+            }
+        } else low[u] = min(dfn[v], low[u]);
+    }
+    if(root &amp;&amp; ch == 0) ds[++s].push_back(u);
+}
+</code></pre>
+<p>边双连通分量<br />
+类似于点双连通分量，我们如果把割边舍弃，剩下的部分就是边双连通分量啦。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, m;
+const int N = 5e5 + 10, M = 4e6 + 10;
+int head[N];
+struct Edge {
+    int v, nxt;
+}e[N];
+int cnt = 1, dfn[N], low[N], s, sta[N], top;
+bool vis[N], g[N];
+void add(int x, int y) {
+    e[++cnt] = {y, head[x]};
+    head[x] = cnt;
+}
+void tarjan(int u, int fr) {
+    dfn[u] = low[u] = ++s;
+    sta[++top] = u; vis[u] = 1;
+    for(int i = head[u]; i; i = e[i].nxt) {
+        int v = e[i].v;
+        if(!vis[v]) {
+            tarjan(v, i);
+            if(dfn[u] &lt; low[v]) g[i] = g[i ^ 1] = 1;
+            low[u] = min(low[u], low[v]);
+        } else if(i != (fr ^ 1)) low[u] = min(low[u], dfn[v]);
+    }
+}
+vector&lt;int&gt;b[N];
+int ans;
+void dfs(int u) {
+    vis[u] = 1; 
+    b[ans].push_back(u);
+    for(int i = head[u]; i; i = e[i].nxt) {
+        if(g[i]) continue;
+        int v = e[i].v;
+        if(!vis[v]) dfs(v);
+    }
+}
+int main() {
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= m; ++i) {
+        int x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        add(x, y);
+        add(y, x);
+    }
+    for(int i = 1; i &lt;= n; ++i) if(!vis[i]) tarjan(i, 0);
+    memset(vis, 0, sizeof(vis));
+    for(int i = 1; i &lt;= n; ++i) {
+        if(!vis[i]) {
+            ++ans;
+            dfs(i);
+        }
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+    for(int i = 1; i &lt;= ans; ++i) {
+        cout &lt;&lt; b[i].size() &lt;&lt; ' ';
+        for(int u : b[i]) cout &lt;&lt; u &lt;&lt; ' ';
+        cout &lt;&lt; endl;
+    }
+    return 0;
 }
 </code></pre>
 
