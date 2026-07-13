@@ -4,7 +4,7 @@
     <meta charset="utf-8" >
 
 <meta name="generator" content="Gridea Pro 1.2.2">
-<title>tarjan | Foofish</title>
+<title>题解 | Foofish</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -21,16 +21,16 @@
 
     <meta name="description" content="我回来了。">
   <meta name="description" content="我回来了。">
-<link rel="canonical" href="https://mercurycity.github.io/tag/tarjan/">
+<link rel="canonical" href="https://mercurycity.github.io/tag/ti-jie/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Foofish","url":"https://mercurycity.github.io","description":"我回来了。","potentialAction":{"@type":"SearchAction","query-input":"required name=search_term_string","target":"https://mercurycity.github.io/search?q={search_term_string}"}}</script>
 <meta property="og:title" content="Foofish">
 <meta property="og:description" content="我回来了。">
-<meta property="og:url" content="https://mercurycity.github.io/tag/tarjan/">
+<meta property="og:url" content="https://mercurycity.github.io/tag/ti-jie/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Foofish">
 <meta property="og:image" content="/images/avatar.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://mercurycity.github.io/tag/tarjan/">
+<meta name="twitter:url" content="https://mercurycity.github.io/tag/ti-jie/">
 <meta name="twitter:title" content="Foofish">
 <meta name="twitter:description" content="我回来了。">
 <meta name="twitter:image" content="/images/avatar.png">
@@ -122,7 +122,7 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="current-tag">标签: tarjan</h2>
+          <h2 class="current-tag">标签: 题解</h2>
           
             <article class="post-item">
               <div class="left">
@@ -139,26 +139,6 @@
 <p>我们考虑一下如果一条边，他要么一直是桥，要么在前 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span> 层是桥，之后就不是了。</p>
 <p>于是我们只需要考虑每条边什么时候开始不是桥。</p>
 <p>我们再说一下如何去看这张图，我们可以把最小的“像素点”（最小节点）看成边双，因为边双内&hellip;</p>
-
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
-                  <h2 class="post-title">[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量</h2>
-                </a>
-                <div class="post-date">
-                  2026-07-12
-                </div>
-                <div class="post-abstract">
-                  <p>这是针对有向图的一个概念。<em><strong>*强连通分量（scc）*</strong></em>：一个强连通分量之间的点可以相互到达。</p>
-<p>我们可以用 tarjan 算法计算一个有向图的强连通分量。</p>
-<p>tarjan 引入了两个数组，巧妙地解决了这个问题。</p>
-<p>第一个数组 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">dfn_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">df</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示时间戳，意思就是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 是 dfs 序中第几个被访问的节点。</p>
-<p>第二个数组 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>w</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">low_x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示不经过父亲节点可以访问到的 &hellip;</p>
 
                 </div>
               </div>
