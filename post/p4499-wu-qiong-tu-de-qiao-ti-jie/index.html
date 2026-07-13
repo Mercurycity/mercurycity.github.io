@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="/favicon.ico?v=1783949205">
+<link rel="shortcut icon" href="/favicon.ico?v=1783949240">
 <link rel="stylesheet" href="/styles/main.css">
 
 
@@ -22,17 +22,17 @@
     <meta name="description" content="" />
     <meta name="keywords" content="题解,tarjan" />
   <meta name="description" content="前置知识：缩点 / 边双连通分量 边双在这题里十分重要是很显然的一点，我们考虑每一层的边双连通分量和连通分量。 我们定义，同一层中的边叫做横边，其他边叫竖边。 我们考虑一下如果一条边，他要么一直是桥，要么在前 iii 层是桥，之后就不是了。 于是我们只需要考虑每条边什么时候开始不是桥。 我们再说一下如何去看这张图，我们可以把最小的“像素点”（最小节点）看成边双，因为边双内&amp;hellip;">
-<link rel="canonical" href="https://mercurycity.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"P4499 无穷图的桥 题解","url":"https://mercurycity.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/","description":"前置知识：缩点 / 边双连通分量 边双在这题里十分重要是很显然的一点，我们考虑每一层的边双连通分量和连通分量。 我们定义，同一层中的边叫做横边，其他边叫竖边。 我们考虑一下如果一条边，他要么一直是桥，要么在前 iii 层是桥，之后就不是了。 于是我们只需要考虑每条边什么时候开始不是桥。 我们再说一下如何去看这张图，我们可以把最小的“像素点”（最小节点）看成边双，因为边双内\u0026hellip;","datePublished":"2026-07-13T17:49:34+08:00","dateModified":"2026-07-13T21:18:46+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/","name":"P4499 无穷图的桥 题解","position":2}]}</script>
+<link rel="canonical" href="https://Foofish.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"P4499 无穷图的桥 题解","url":"https://Foofish.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/","description":"前置知识：缩点 / 边双连通分量 边双在这题里十分重要是很显然的一点，我们考虑每一层的边双连通分量和连通分量。 我们定义，同一层中的边叫做横边，其他边叫竖边。 我们考虑一下如果一条边，他要么一直是桥，要么在前 iii 层是桥，之后就不是了。 于是我们只需要考虑每条边什么时候开始不是桥。 我们再说一下如何去看这张图，我们可以把最小的“像素点”（最小节点）看成边双，因为边双内\u0026hellip;","datePublished":"2026-07-13T17:49:34+08:00","dateModified":"2026-07-13T21:18:46+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://Foofish.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://Foofish.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/","name":"P4499 无穷图的桥 题解","position":2}]}</script>
 <meta property="og:title" content="P4499 无穷图的桥 题解">
 <meta property="og:description" content="前置知识：缩点 / 边双连通分量 边双在这题里十分重要是很显然的一点，我们考虑每一层的边双连通分量和连通分量。 我们定义，同一层中的边叫做横边，其他边叫竖边。 我们考虑一下如果一条边，他要么一直是桥，要么在前 iii 层是桥，之后就不是了。 于是我们只需要考虑每条边什么时候开始不是桥。 我们再说一下如何去看这张图，我们可以把最小的“像素点”（最小节点）看成边双，因为边双内&amp;hellip;">
-<meta property="og:url" content="https://mercurycity.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/">
+<meta property="og:url" content="https://Foofish.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Foofish">
 <meta property="og:image" content="/images/avatar.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://mercurycity.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/">
+<meta name="twitter:url" content="https://Foofish.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/">
 <meta name="twitter:title" content="P4499 无穷图的桥 题解">
 <meta name="twitter:description" content="前置知识：缩点 / 边双连通分量 边双在这题里十分重要是很显然的一点，我们考虑每一层的边双连通分量和连通分量。 我们定义，同一层中的边叫做横边，其他边叫竖边。 我们考虑一下如果一条边，他要么一直是桥，要么在前 iii 层是桥，之后就不是了。 于是我们只需要考虑每条边什么时候开始不是桥。 我们再说一下如何去看这张图，我们可以把最小的“像素点”（最小节点）看成边双，因为边双内&amp;hellip;">
 <meta name="twitter:image" content="/images/avatar.png">
@@ -45,7 +45,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="/">
-        <img src="/images/avatar.png?v=1783949205" class="site-logo">
+        <img src="/images/avatar.png?v=1783949240" class="site-logo">
         <h1 class="site-title">Foofish</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">

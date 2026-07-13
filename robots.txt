@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mercurycity.github.io/sitemap.xml
+Sitemap: https://Foofish.github.io/sitemap.xml
