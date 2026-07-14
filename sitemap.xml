@@ -1,62 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://Foofish.github.io/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/</loc>
+    <loc>https://mercurycity.github.io/post/p6837-ioi-2020-shu-mo-gu-ti-jie/</loc>
+    <lastmod>2026-07-14T10:20:06+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mercurycity.github.io/post/p4499-wu-qiong-tu-de-qiao-ti-jie/</loc>
     <lastmod>2026-07-13T21:18:46+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/</loc>
+    <loc>https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/</loc>
     <lastmod>2026-07-12T23:45:44+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/post/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/post/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/tags/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/tags/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/archives/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/archives/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/tag/xue-xi-bi-ji/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/tag/xue-xi-bi-ji/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/tag/tarjan/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/tag/tarjan/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/tag/ti-jie/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/tag/ti-jie/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://Foofish.github.io/links/</loc>
-    <lastmod>2026-07-13T21:28:08+08:00</lastmod>
+    <loc>https://mercurycity.github.io/tag/jiao-hu/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://mercurycity.github.io/tag/ahdoc/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://mercurycity.github.io/links/</loc>
+    <lastmod>2026-07-14T10:54:04+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

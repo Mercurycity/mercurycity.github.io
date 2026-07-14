@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="/favicon.ico?v=1783949288">
+<link rel="shortcut icon" href="/favicon.ico?v=1783997644">
 <link rel="stylesheet" href="/styles/main.css">
 
 
@@ -22,17 +22,17 @@
     <meta name="description" content="" />
     <meta name="keywords" content="学习笔记,tarjan" />
   <meta name="description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
-<link rel="canonical" href="https://Foofish.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量","url":"https://Foofish.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","description":"这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 \u0026hellip;","datePublished":"2026-07-12T06:10:20+08:00","dateModified":"2026-07-12T23:45:44+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://Foofish.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://Foofish.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","name":"[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量","position":2}]}</script>
+<link rel="canonical" href="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量","url":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","description":"这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 \u0026hellip;","datePublished":"2026-07-12T06:10:20+08:00","dateModified":"2026-07-12T23:45:44+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/","name":"[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量","position":2}]}</script>
 <meta property="og:title" content="[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量">
 <meta property="og:description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
-<meta property="og:url" content="https://Foofish.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
+<meta property="og:url" content="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Foofish">
 <meta property="og:image" content="/images/avatar.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://Foofish.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
+<meta name="twitter:url" content="https://mercurycity.github.io/post/xue-xi-bi-ji-suo-dian-qiang-lian-tong-fen-liang/">
 <meta name="twitter:title" content="[学习笔记] 割点 / 缩点 / 强连通分量 / 点双连通分量 / 边双连通分量">
 <meta name="twitter:description" content="这是针对有向图的一个概念。*强连通分量（scc）*：一个强连通分量之间的点可以相互到达。 我们可以用 tarjan 算法计算一个有向图的强连通分量。 tarjan 引入了两个数组，巧妙地解决了这个问题。 第一个数组 dfnxdfn_xdfnx​ 表示时间戳，意思就是 xxx 是 dfs 序中第几个被访问的节点。 第二个数组 lowxlow_xlowx​ 表示不经过父亲节点可以访问到的 &amp;hellip;">
 <meta name="twitter:image" content="/images/avatar.png">
@@ -45,7 +45,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="/">
-        <img src="/images/avatar.png?v=1783949288" class="site-logo">
+        <img src="/images/avatar.png?v=1783997644" class="site-logo">
         <h1 class="site-title">Foofish</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
