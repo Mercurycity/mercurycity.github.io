@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="/favicon.ico?v=1783997644">
+<link rel="shortcut icon" href="/favicon.ico?v=1784035129">
 <link rel="stylesheet" href="/styles/main.css">
 
 
@@ -23,7 +23,7 @@
     <meta name="keywords" content="题解,交互,ahdoc" />
   <meta name="description" content="好神的题啊。 首先 n≤20000n\leq20000n≤20000 这时候询问次数只能有 226226226 次，那么我们大概猜到这是一个 O(n)\mathcal{O}(\sqrt n)O(n​) 的东西（常数忽略）。 可是我连 O(n)\mathcal{O}(\sqrt{n})O(n​) 的方法都没想到（捂脸），但是我想到了个大概（明明只需要考虑一下 000 和 111 多的那个的。） 好的，那么我们首先讲一个朴素的 $\mathc&amp;hellip;">
 <link rel="canonical" href="https://mercurycity.github.io/post/p6837-ioi-2020-shu-mo-gu-ti-jie/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"P6837 [IOI 2020] 数蘑菇 题解","url":"https://mercurycity.github.io/post/p6837-ioi-2020-shu-mo-gu-ti-jie/","description":"好神的题啊。 首先 n≤20000n\\leq20000n≤20000 这时候询问次数只能有 226226226 次，那么我们大概猜到这是一个 O(n)\\mathcal{O}(\\sqrt n)O(n​) 的东西（常数忽略）。 可是我连 O(n)\\mathcal{O}(\\sqrt{n})O(n​) 的方法都没想到（捂脸），但是我想到了个大概（明明只需要考虑一下 000 和 111 多的那个的。） 好的，那么我们首先讲一个朴素的 $\\mathc\u0026hellip;","datePublished":"2026-07-14T10:20:06Z","dateModified":"2026-07-14T10:20:06Z","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"P6837 [IOI 2020] 数蘑菇 题解","url":"https://mercurycity.github.io/post/p6837-ioi-2020-shu-mo-gu-ti-jie/","description":"好神的题啊。 首先 n≤20000n\\leq20000n≤20000 这时候询问次数只能有 226226226 次，那么我们大概猜到这是一个 O(n)\\mathcal{O}(\\sqrt n)O(n​) 的东西（常数忽略）。 可是我连 O(n)\\mathcal{O}(\\sqrt{n})O(n​) 的方法都没想到（捂脸），但是我想到了个大概（明明只需要考虑一下 000 和 111 多的那个的。） 好的，那么我们首先讲一个朴素的 $\\mathc\u0026hellip;","datePublished":"2026-07-14T18:20:06+08:00","dateModified":"2026-07-14T13:30:35+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/p6837-ioi-2020-shu-mo-gu-ti-jie/","name":"P6837 [IOI 2020] 数蘑菇 题解","position":2}]}</script>
 <meta property="og:title" content="P6837 [IOI 2020] 数蘑菇 题解">
 <meta property="og:description" content="好神的题啊。 首先 n≤20000n\leq20000n≤20000 这时候询问次数只能有 226226226 次，那么我们大概猜到这是一个 O(n)\mathcal{O}(\sqrt n)O(n​) 的东西（常数忽略）。 可是我连 O(n)\mathcal{O}(\sqrt{n})O(n​) 的方法都没想到（捂脸），但是我想到了个大概（明明只需要考虑一下 000 和 111 多的那个的。） 好的，那么我们首先讲一个朴素的 $\mathc&amp;hellip;">
@@ -45,7 +45,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="/">
-        <img src="/images/avatar.png?v=1783997644" class="site-logo">
+        <img src="/images/avatar.png?v=1784035129" class="site-logo">
         <h1 class="site-title">Foofish</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -198,6 +198,99 @@ c26.7,-32.7,52,-63,76,-91s52,-60,52,-60s208,722,208,722
 c56,-175.3,126.3,-397.3,211,-666c84.7,-268.7,153.8,-488.2,207.5,-658.5
 c53.7,-170.3,84.5,-266.8,92.5,-289.5z
 M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.6049em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">o</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 差不多可以通过本题。</p>
+<p>实现难度并不是很大。调参错了很多次，最后试出来 K = 111 的时候过了。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+// #include &quot;mushrooms.h&quot;
+using namespace std;
+int use_machine(std::vector&lt;int&gt; x);
+vector&lt;int&gt;b[2];
+int count_mushrooms(int n) {
+    int ans = 1;
+    if(n &lt;= 226) {
+        for(int i = 1; i &lt; n; ++i) ans += (use_machine({0, i}) ^ 1);
+        return ans;
+    }
+    int K = 111;
+    b[0].clear(), b[1].clear();
+    b[0].push_back(0);
+    #define cnt0 b[0].size()
+    #define cnt1 b[1].size()
+    #define id (cnt0 &lt; cnt1)
+    #define idsz max(b[0].size(), b[1].size())
+    int len = 1;
+    while(max(cnt0, cnt1) &lt; 2) {
+        int res = use_machine({0, len});
+        b[res].push_back(len ++);
+    }
+    while(max(cnt0, cnt1) &lt; 3) {
+        int uid = id;
+        int res = use_machine({len, b[uid][0], len + 1, b[uid][1]});
+        if(res &amp; 1) b[uid ^ 1].push_back(len);
+        else b[uid].push_back(len);
+        if(res &gt;= 2) b[uid ^ 1].push_back(len + 1);
+        else b[uid].push_back(len + 1);
+        len += 2;
+    }
+    while(max(cnt0, cnt1) &lt; K) {
+        int uid = id;
+        int res = use_machine({len, b[uid][0], len + 1, b[uid][1], len + 2, b[uid][2]});
+        if(res &amp; 1) b[uid ^ 1].push_back(len);
+        else b[uid].push_back(len);
+        res = res / 2;
+        if(res == 0 || res == 2) {
+            if(res == 0) {
+                b[uid].push_back(len + 1);
+                b[uid].push_back(len + 2);
+            } else {
+                b[uid ^ 1].push_back(len + 1);
+                b[uid ^ 1].push_back(len + 2);
+            }
+            len += 3;
+        } else {
+            if(b[uid ^ 1].size() &lt; 2) {
+                int res2 = use_machine({len + 2, b[uid][0], len + 3, b[uid][1]});
+                if(res2 &amp; 1) b[uid].push_back(len + 1), b[uid ^ 1].push_back(len + 2);
+                else b[uid].push_back(len + 2), b[uid ^ 1].push_back(len + 1);
+                if(res2 &gt;= 2) b[uid ^ 1].push_back(len + 3);
+                else b[uid].push_back(len + 3);
+                len += 4;
+            } else {
+                int res2 = use_machine({len + 3, b[uid][0], len + 4, b[uid][1], len + 1, b[uid][2], b[uid ^ 1][0], len + 2, b[uid ^ 1][1]});
+                res2 --;
+                if(res2 &amp; 1) b[uid ^ 1].push_back(len + 3);
+                else b[uid].push_back(len + 3);
+                res2 /= 2;
+                if(res2 &amp; 1) b[uid ^ 1].push_back(len + 4);
+                else b[uid].push_back(len + 4);
+                if(res2 &gt;= 2) b[uid].push_back(len + 2), b[uid ^ 1].push_back(len + 1);
+                else b[uid].push_back(len + 1), b[uid ^ 1].push_back(len + 2);
+                len += 5;
+            }
+        }
+    }
+    ans = b[0].size();
+    vector&lt;int&gt;query;
+    while(len &lt; n) {
+        query.clear();
+        int i;
+        int uid = id;
+        for(i = 0; i &lt; idsz &amp;&amp; len + i &lt; n; ++i) {
+            query.push_back(i + len);
+            query.push_back(b[uid][i]);
+        }
+        int A = use_machine(query);
+        ans = ans + ((uid == 0) ? (query.size() / 2 - (A + 1) / 2) : ((A + 1) / 2));
+        if(A &amp; 1) b[uid ^ 1].push_back(len);
+        else b[uid].push_back(len);
+        len = len + i;
+    }
+    return ans;
+    #undef cnt0
+    #undef cnt1
+    #undef idsz
+    #undef id
+}
+</code></pre>
 
             </div>
             
