@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<meta name="generator" content="Gridea Pro 1.2.2">
+<title>Kruskal 重构树学习笔记 | Foofish</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="/favicon.ico?v=1784386709">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="学习笔记,kruskal重构树" />
+  <meta name="description" content="众所周知，最小生成树中有一个算法叫 Kruskal 算法。而 Kruskal 重构树正是 Kruskal 最小生成树算法的一个延伸。 我们回忆一下 Kruskal 最小生成树算法。每次我们会选取当前最短的可用边，只要这条边的两边没有连通那么就把这条边加入生成树。 那么 Kruskal 重构树构建的过程与上述过程极为类似。我们也是选取当前最短的可用边，这条边的两端没有连通的话，那么我们会&amp;hellip;">
+<link rel="canonical" href="https://mercurycity.github.io/post/kruskal-chong-gou-shu-xue-xi-bi-ji/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Kruskal 重构树学习笔记","url":"https://mercurycity.github.io/post/kruskal-chong-gou-shu-xue-xi-bi-ji/","description":"众所周知，最小生成树中有一个算法叫 Kruskal 算法。而 Kruskal 重构树正是 Kruskal 最小生成树算法的一个延伸。 我们回忆一下 Kruskal 最小生成树算法。每次我们会选取当前最短的可用边，只要这条边的两边没有连通那么就把这条边加入生成树。 那么 Kruskal 重构树构建的过程与上述过程极为类似。我们也是选取当前最短的可用边，这条边的两端没有连通的话，那么我们会\u0026hellip;","datePublished":"2026-07-18T20:47:24Z","dateModified":"2026-07-18T20:47:24Z","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/kruskal-chong-gou-shu-xue-xi-bi-ji/","name":"Kruskal 重构树学习笔记","position":2}]}</script>
+<meta property="og:title" content="Kruskal 重构树学习笔记">
+<meta property="og:description" content="众所周知，最小生成树中有一个算法叫 Kruskal 算法。而 Kruskal 重构树正是 Kruskal 最小生成树算法的一个延伸。 我们回忆一下 Kruskal 最小生成树算法。每次我们会选取当前最短的可用边，只要这条边的两边没有连通那么就把这条边加入生成树。 那么 Kruskal 重构树构建的过程与上述过程极为类似。我们也是选取当前最短的可用边，这条边的两端没有连通的话，那么我们会&amp;hellip;">
+<meta property="og:url" content="https://mercurycity.github.io/post/kruskal-chong-gou-shu-xue-xi-bi-ji/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Foofish">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://mercurycity.github.io/post/kruskal-chong-gou-shu-xue-xi-bi-ji/">
+<meta name="twitter:title" content="Kruskal 重构树学习笔记">
+<meta name="twitter:description" content="众所周知，最小生成树中有一个算法叫 Kruskal 算法。而 Kruskal 重构树正是 Kruskal 最小生成树算法的一个延伸。 我们回忆一下 Kruskal 最小生成树算法。每次我们会选取当前最短的可用边，只要这条边的两边没有连通那么就把这条边加入生成树。 那么 Kruskal 重构树构建的过程与上述过程极为类似。我们也是选取当前最短的可用边，这条边的两端没有连通的话，那么我们会&amp;hellip;">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="/">
+        <img src="/images/avatar.png?v=1784386709" class="site-logo">
+        <h1 class="site-title">Foofish</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/post" class="site-nav">
+            博客
+          </a>
+        
+      
+        
+          <a href="/memos" class="site-nav">
+            闪念
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/links" class="site-nav">
+            友链
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      我回来了。
+    </div>
+    <div class="site-footer">
+      你渴望力量吗 | <a class="rss" href="/feed.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Kruskal 重构树学习笔记</h2>
+            <div class="post-date">2026-07-18</div>
+            
+            <div class="post-content" v-pre>
+              <p>众所周知，最小生成树中有一个算法叫 Kruskal 算法。而 Kruskal 重构树正是 Kruskal 最小生成树算法的一个延伸。</p>
+<p>我们回忆一下 Kruskal 最小生成树算法。每次我们会选取当前最短的可用边，只要这条边的两边没有连通那么就把这条边加入生成树。</p>
+<p>那么 Kruskal 重构树构建的过程与上述过程极为类似。我们也是选取当前最短的可用边，这条边的两端没有连通的话，那么我们会给这条边新建成为一个点，然后再把这个点和边的两个端点所在的子树连接起来。</p>
+<p>那么这样一颗 Kruskal 重构树有什么性质呢？</p>
+<p>首先如果是按照上述的构建过程，我们明显能发现，这是一个大根堆。并且还满足原图中的点全部是叶子。非叶子节点代表的都是边。这两点是非常显然的。</p>
+<p>他也有一些比较好的性质。</p>
+<h4 id="-kruskal--lca-">关键性质：原图中两个点之间所有路径中最大边权的最小值就是最小生成树上两点简单路径边权的最大值，也就是 Kruskal 重构树中两点 LCA 的点权</h4>
+<p>这一点我们稍微证明一下。我们考虑 Kruskal 最小生成树的构建过程，我们有没有可能走一些不在最小生成树中的边，反而让最大边权变小了呢？那么既然走了不在最小生成树中的边，让最大边权变小了，那么最大边权肯定就是不在最小生成树中的边提供的喽。而这样的边权却小于最小生成树中的边，那么肯定和最小生成树矛盾了，不然我可以选择这条边让最小生成树更小的。</p>
+<p>这就是前半句话的解释。后半句话是显然的。</p>
+<h5 id="p1967">例题：P1967</h5>
+<p>纯模版题，就是求最大生成树下的 Kruskal 重构树的 LCA。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, m;
+const int M = 1e5 + 10, N = 2e4 + 10;
+struct Edge {
+    int u, v, val;
+    bool operator &lt; (const Edge &amp;edge) const {
+        return val &gt; edge.val;
+    }
+}e[M];
+int fa[N + M];
+int findf(int x) {
+    return (fa[x] == x) ? x : (fa[x] = findf(fa[x]));
+}
+int va[N + M];
+vector&lt;int&gt;G[N + M];
+void addedge(int u, int v) {
+    G[u].push_back(v);
+    G[v].push_back(u);
+}
+int st[N + M][20], dep[N + M];
+void dfs(int u, int F) {
+    st[u][0] = F; dep[u] = dep[F] + 1;
+    // cout &lt;&lt; u &lt;&lt; ' ' &lt;&lt; F &lt;&lt; ' ' &lt;&lt; dep[u] &lt;&lt; ' ' &lt;&lt; dep[F] &lt;&lt; endl;
+    for(int v : G[u]) {
+        if(v == F) continue;
+        dfs(v, u);
+    }
+}
+int cnt;
+void ST() {
+    for(int i = 1; i &lt; 20; ++i)
+        for(int j = 1; j &lt;= cnt; ++j)
+            st[j][i] = st[st[j][i - 1]][i - 1];
+}
+int LCA(int x, int y) {
+    if(findf(x) != findf(y)) return -1;
+    if(dep[x] &lt; dep[y]) swap(x, y);
+    int u = dep[x] - dep[y];
+    // puts(&quot;-&quot;);
+    // cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; endl;
+    // cout &lt;&lt; dep[8] &lt;&lt; ' ' &lt;&lt; dep[7] &lt;&lt; endl;
+    for(int i = 0; i &lt; 20; ++i) 
+        if((1 &lt;&lt; i) &amp; u) 
+            x = st[x][i];
+    // puts(&quot;=&quot;);
+    // cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; endl;
+    if(x == y) return x;
+    for(int i = 19; i &gt;= 0; --i) 
+        if(st[x][i] != st[y][i]) 
+            x = st[x][i], y = st[y][i];
+    // puts(&quot;!&quot;);
+    // cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; endl;
+    return st[x][0];
+}
+int main() {
+    ios::sync_with_stdio(), cin.tie();
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1; i &lt;= m; ++i) cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].val;
+    for(int i = 1; i &lt;= n; ++i) fa[i] = i; cnt = n;
+    sort(e + 1, e + m + 1);
+    for(int i = 1; i &lt;= m; ++i) {
+        int fu = findf(e[i].u), fv = findf(e[i].v);
+        if(fu != fv) {
+            va[++cnt] = e[i].val;
+            // cout &lt;&lt; fu &lt;&lt; ' ' &lt;&lt; fv &lt;&lt; ' ' &lt;&lt; cnt &lt;&lt; endl;
+            addedge(fu, cnt);
+            addedge(fv, cnt);
+            fa[fu] = fa[fv] = fa[cnt] = cnt;
+        }
+    }
+    for(int i = 1; i &lt;= cnt; ++i) if(!dep[i]) dfs(findf(i), 0);
+    ST();
+    int Q;
+    cin &gt;&gt; Q;
+    while(Q--) {
+        int x, y;
+        cin &gt;&gt; x &gt;&gt; y;
+        int lca = LCA(x, y);
+        // cout &lt;&lt; lca &lt;&lt; endl;
+        if(lca == -1) puts(&quot;-1&quot;);
+        else cout &lt;&lt; va[lca] &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="/tag/xue-xi-bi-ji/" class="tag">
+                    学习笔记
+                  </a>
+                
+                  <a href="/tag/kruskal-zhong-gou-shu/" class="tag">
+                    kruskal重构树
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="/post/2026-niu-ke-shu-qi-duo-xiao-xun-lian-ying-1-bi-sai-ji-lu/">
+                  <h3 class="post-title">
+                    2026 牛客暑期多校训练营 1 比赛记录
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  <script>console.log("\n%c ✦ Gridea Pro v1.2.2 %c · Theme: simple v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+</html>
