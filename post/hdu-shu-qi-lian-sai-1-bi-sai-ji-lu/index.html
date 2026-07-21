@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<meta name="generator" content="Gridea Pro 1.2.2">
+<title>HDU 暑期联赛 1 比赛记录 | Foofish</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="/favicon.ico?v=1784638241">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+  <meta name="description" content="好难的一场 /tt 这场开局队友都忘了，我还是倒开。倒开几题发现并不可做。看了 10 分钟，Z 来了。我看到 1010 是个博弈论，有一个人过了，我就去想博弈论了。Z 去做此时过的人多的 1001 了。可是我不太会博弈论，我就把博弈论交给 Z 了，我去做 1004 和 1005，1005 是一个题意跟 KMP 自动机有关的东西，可惜我并不会这个，于是我就去看 1004 了，感觉是个贪心，和国&amp;hellip;">
+<link rel="canonical" href="https://mercurycity.github.io/post/hdu-shu-qi-lian-sai-1-bi-sai-ji-lu/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"HDU 暑期联赛 1 比赛记录","url":"https://mercurycity.github.io/post/hdu-shu-qi-lian-sai-1-bi-sai-ji-lu/","description":"好难的一场 /tt 这场开局队友都忘了，我还是倒开。倒开几题发现并不可做。看了 10 分钟，Z 来了。我看到 1010 是个博弈论，有一个人过了，我就去想博弈论了。Z 去做此时过的人多的 1001 了。可是我不太会博弈论，我就把博弈论交给 Z 了，我去做 1004 和 1005，1005 是一个题意跟 KMP 自动机有关的东西，可惜我并不会这个，于是我就去看 1004 了，感觉是个贪心，和国\u0026hellip;","datePublished":"2026-07-21T20:38:59+08:00","dateModified":"2026-07-21T20:38:59+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/hdu-shu-qi-lian-sai-1-bi-sai-ji-lu/","name":"HDU 暑期联赛 1 比赛记录","position":2}]}</script>
+<meta property="og:title" content="HDU 暑期联赛 1 比赛记录">
+<meta property="og:description" content="好难的一场 /tt 这场开局队友都忘了，我还是倒开。倒开几题发现并不可做。看了 10 分钟，Z 来了。我看到 1010 是个博弈论，有一个人过了，我就去想博弈论了。Z 去做此时过的人多的 1001 了。可是我不太会博弈论，我就把博弈论交给 Z 了，我去做 1004 和 1005，1005 是一个题意跟 KMP 自动机有关的东西，可惜我并不会这个，于是我就去看 1004 了，感觉是个贪心，和国&amp;hellip;">
+<meta property="og:url" content="https://mercurycity.github.io/post/hdu-shu-qi-lian-sai-1-bi-sai-ji-lu/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Foofish">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://mercurycity.github.io/post/hdu-shu-qi-lian-sai-1-bi-sai-ji-lu/">
+<meta name="twitter:title" content="HDU 暑期联赛 1 比赛记录">
+<meta name="twitter:description" content="好难的一场 /tt 这场开局队友都忘了，我还是倒开。倒开几题发现并不可做。看了 10 分钟，Z 来了。我看到 1010 是个博弈论，有一个人过了，我就去想博弈论了。Z 去做此时过的人多的 1001 了。可是我不太会博弈论，我就把博弈论交给 Z 了，我去做 1004 和 1005，1005 是一个题意跟 KMP 自动机有关的东西，可惜我并不会这个，于是我就去看 1004 了，感觉是个贪心，和国&amp;hellip;">
+<meta name="twitter:image" content="/images/avatar.png">
+</head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="/">
+        <img src="/images/avatar.png?v=1784638241" class="site-logo">
+        <h1 class="site-title">Foofish</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/post" class="site-nav">
+            博客
+          </a>
+        
+      
+        
+          <a href="/memos" class="site-nav">
+            闪念
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/links" class="site-nav">
+            友链
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      我回来了。
+    </div>
+    <div class="site-footer">
+      你渴望力量吗 | <a class="rss" href="/feed.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">HDU 暑期联赛 1 比赛记录</h2>
+            <div class="post-date">2026-07-21</div>
+            
+            <div class="post-content" v-pre>
+              <p>好难的一场 /tt</p>
+<p>这场开局队友都忘了，我还是倒开。倒开几题发现并不可做。看了 10 分钟，Z 来了。我看到 1010 是个博弈论，有一个人过了，我就去想博弈论了。Z 去做此时过的人多的 1001 了。可是我不太会博弈论，我就把博弈论交给 Z 了，我去做 1004 和 1005，1005 是一个题意跟 KMP 自动机有关的东西，可惜我并不会这个，于是我就去看 1004 了，感觉是个贪心，和国王游戏很像的题，我就去画一下基本的图，做了好几种方法都没做对。H 一个小时的时候加入了战场，H 去想 1005 了，很快做了出来。然后我和 Z 应该就在想这个 1004。最后 H 听了我们的做法后稍微修改了一下，把 1004 A了，但是我的假做法吃了好几发罚时。然后 2h 内我们一直在想 H，只推到一点有些用的东西。</p>
+<p>好难的一场呐。</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="/post/26xia-niu-ke-duo-xiao-1jie-ti-bao-gao/">
+                  <h3 class="post-title">
+                    26夏牛客多校1解题报告
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  <script>console.log("\n%c ✦ Gridea Pro v1.2.2 %c · Theme: simple v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+</html>

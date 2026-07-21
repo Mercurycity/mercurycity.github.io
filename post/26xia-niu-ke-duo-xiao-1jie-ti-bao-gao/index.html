@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<meta name="generator" content="Gridea Pro 1.2.2">
+<title>26夏牛客多校1解题报告 | Foofish</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="/favicon.ico?v=1784638241">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="题解" />
+  <meta name="description" content="C Fish Eating 为了这道题专门去学了一下 Kruskal 重构树。 这个题整个就很像一个 Kruskal 重构树。从小到大的加入鱼，我们去用并查集的话还可以满足这是一个大根堆。（并查集本身是一棵树嘛）然后我们维护如果要网上走要达到的值，这个值应该是 vafa−szu+1va_{fa}-sz_{u}+1vafa​−szu​+1 。这很显然嘛。因为在整个过程中我一共可以吃 szu−1sz_u-1szu​−1 条鱼（不包括自己）。然后还要&amp;hellip;">
+<link rel="canonical" href="https://mercurycity.github.io/post/26xia-niu-ke-duo-xiao-1jie-ti-bao-gao/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"26夏牛客多校1解题报告","url":"https://mercurycity.github.io/post/26xia-niu-ke-duo-xiao-1jie-ti-bao-gao/","description":"C Fish Eating 为了这道题专门去学了一下 Kruskal 重构树。 这个题整个就很像一个 Kruskal 重构树。从小到大的加入鱼，我们去用并查集的话还可以满足这是一个大根堆。（并查集本身是一棵树嘛）然后我们维护如果要网上走要达到的值，这个值应该是 vafa−szu+1va_{fa}-sz_{u}+1vafa​−szu​+1 。这很显然嘛。因为在整个过程中我一共可以吃 szu−1sz_u-1szu​−1 条鱼（不包括自己）。然后还要\u0026hellip;","datePublished":"2026-07-20T00:38:14+08:00","dateModified":"2026-07-21T20:50:36+08:00","author":{"@type":"Person","name":"Foofish"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Foofish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mercurycity.github.io","name":"Foofish","position":1},{"@type":"ListItem","item":"https://mercurycity.github.io/post/26xia-niu-ke-duo-xiao-1jie-ti-bao-gao/","name":"26夏牛客多校1解题报告","position":2}]}</script>
+<meta property="og:title" content="26夏牛客多校1解题报告">
+<meta property="og:description" content="C Fish Eating 为了这道题专门去学了一下 Kruskal 重构树。 这个题整个就很像一个 Kruskal 重构树。从小到大的加入鱼，我们去用并查集的话还可以满足这是一个大根堆。（并查集本身是一棵树嘛）然后我们维护如果要网上走要达到的值，这个值应该是 vafa−szu+1va_{fa}-sz_{u}+1vafa​−szu​+1 。这很显然嘛。因为在整个过程中我一共可以吃 szu−1sz_u-1szu​−1 条鱼（不包括自己）。然后还要&amp;hellip;">
+<meta property="og:url" content="https://mercurycity.github.io/post/26xia-niu-ke-duo-xiao-1jie-ti-bao-gao/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Foofish">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://mercurycity.github.io/post/26xia-niu-ke-duo-xiao-1jie-ti-bao-gao/">
+<meta name="twitter:title" content="26夏牛客多校1解题报告">
+<meta name="twitter:description" content="C Fish Eating 为了这道题专门去学了一下 Kruskal 重构树。 这个题整个就很像一个 Kruskal 重构树。从小到大的加入鱼，我们去用并查集的话还可以满足这是一个大根堆。（并查集本身是一棵树嘛）然后我们维护如果要网上走要达到的值，这个值应该是 vafa−szu+1va_{fa}-sz_{u}+1vafa​−szu​+1 。这很显然嘛。因为在整个过程中我一共可以吃 szu−1sz_u-1szu​−1 条鱼（不包括自己）。然后还要&amp;hellip;">
+<meta name="twitter:image" content="/images/avatar.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
+</head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="/">
+        <img src="/images/avatar.png?v=1784638241" class="site-logo">
+        <h1 class="site-title">Foofish</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/post" class="site-nav">
+            博客
+          </a>
+        
+      
+        
+          <a href="/memos" class="site-nav">
+            闪念
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/links" class="site-nav">
+            友链
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      我回来了。
+    </div>
+    <div class="site-footer">
+      你渴望力量吗 | <a class="rss" href="/feed.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">26夏牛客多校1解题报告</h2>
+            <div class="post-date">2026-07-20</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="c-fish-eating">C Fish Eating</h2>
+<p>为了这道题专门去学了一下 Kruskal 重构树。<br />
+这个题整个就很像一个 Kruskal 重构树。从小到大的加入鱼，我们去用并查集的话还可以满足这是一个大根堆。（并查集本身是一棵树嘛）然后我们维护如果要网上走要达到的值，这个值应该是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><msub><mi>a</mi><mrow><mi>f</mi><mi>a</mi></mrow></msub><mo>−</mo><mi>s</mi><msub><mi>z</mi><mi>u</mi></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">va_{fa}-sz_{u}+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8694em;vertical-align:-0.2861em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1076em;">f</span><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 。这很显然嘛。因为在整个过程中我一共可以吃 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>z</mi><mi>u</mi></msub><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">sz_u-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord mathnormal">s</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 条鱼（不包括自己）。然后还要达到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><msub><mi>a</mi><mrow><mi>f</mi><mi>a</mi></mrow></msub></mrow><annotation encoding="application/x-tex">va_{fa}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1076em;">f</span><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span> 的大小，那么就是这两个相减喽。<br />
+好的，然后我们考虑操作 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span> 的话，就是要求想求点到根的要达到的值的最大值。我们发现这个值是可以并查集维护的（需要思考）然后那么就可以做啦~</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, m, q, l;
+const int dx[] = {1, -1, 0, 0},
+          dy[] = {0, 0, 1, -1};
+const int N = 1e6 + 10;
+int fa[N], sz[N], mx[N];
+int findf(int x) {
+    if(fa[x] == x) return x;
+    int y = findf(fa[x]);
+    mx[x] = max(mx[x], mx[fa[x]]);
+    return fa[x] = y;
+}
+int a[N];
+
+int main() {
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; q;
+    for(int i = 1; i &lt;= n * m; ++i) fa[i] = i, sz[i] = 1, mx[i] = 0;
+    while(q--) {
+        int opt, x, y, v;
+        cin &gt;&gt; opt;
+        if(opt == 1) {
+            cin &gt;&gt; x &gt;&gt; y &gt;&gt; v;
+            x ^= l; y ^= l;
+            a[(x - 1) * m + y] = v;
+            for(int d = 0; d &lt; 4; ++d) {
+                int nx = x + dx[d], ny = y + dy[d];
+                if(nx &gt;= 1 &amp;&amp; ny &gt;= 1 &amp;&amp; nx &lt;= n &amp;&amp; ny &lt;= m) {
+                    int id = (nx - 1) * m + ny;
+                    if(a[id]) {
+                        int fu = findf((x - 1) * m + y), fv = findf(id);
+                        if(fu == fv) continue;
+                        sz[fu] += sz[fv];
+                        mx[fv] = max(a[fu] - sz[fv] + 1, mx[fv]);
+                        // cout &lt;&lt; fu &lt;&lt; ' ' &lt;&lt; fv &lt;&lt; ' ' &lt;&lt; mx[fv] &lt;&lt; ' ' &lt;&lt; a[fv] &lt;&lt; ' ' &lt;&lt; a[fu] &lt;&lt; ' ' &lt;&lt; sz[fv] &lt;&lt; endl;
+                        fa[fv] = fu;
+                    }
+                }
+            }
+            cout &lt;&lt; (l = sz[findf((x - 1) * m + y)] - 1) &lt;&lt; endl;
+        } else {
+            int x, y;
+            cin &gt;&gt; x &gt;&gt; y;
+            x ^= l; y ^= l;
+            // cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; endl;
+            findf((x - 1) * m + y);
+            cout &lt;&lt; (l = (max(0, mx[(x - 1) * m + y] - a[(x - 1) * m + y]))) &lt;&lt; endl;
+        }
+    }
+    return 0;
+}
+</code></pre>
+<h2 id="h-rock-paper-scissors-master">H Rock-Paper-Scissors Master</h2>
+<p>马尔科夫链的题，重点是想到马尔科夫链的一个性质，后面不同状态的概率趋于稳定。这题里就是一样的，于是后面的期望相邻之差趋于一个等差数列，我们发现 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><msup><mn>10</mn><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">K = 10^4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span> 的时候已经非常收敛，可以通过本题。<br />
+包括这种题目是怎么推的。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long double db;
+int T;
+struct Cards {
+    int c[4];
+};
+const int N = 1e4 + 10;
+Cards rev[15];
+int idx, id_map[5][5][5], nxt[105][4][4][4][4];
+db dp[N][11][11];
+db eps = 1e-12;
+int score(int x, int y) {
+    if((x == 1 &amp;&amp; y == 2) || (x == 2 &amp;&amp; y == 3) || (x == 3 &amp;&amp; y == 1)) return 3;
+    if(x == y) return 1;
+    return 0;
+}
+db avr = 0;
+bool vis[N][11][11];
+db dfs(int dep, int stat1, int stat2) {
+    if(dep == 0) return 0;
+    if(vis[dep][stat1][stat2]) return dp[dep][stat1][stat2];
+    vis[dep][stat1][stat2] = 1;
+    db maxx = 0;
+    for(int k = 1; k &lt;= 3; ++k) {
+        if(rev[stat1].c[k] == 0) continue;
+        db minn = 1e18;
+        for(int l = 1; l &lt;= 3; ++l) {
+            if(rev[stat2].c[l] == 0) continue;
+            db summ = 0;
+            for(int i = 1; i &lt;= 3; ++i) {
+                for(int j = 1; j &lt;= 3; ++j) {
+                    Cards new1 = rev[stat1], new2 = rev[stat2];
+                    new1.c[i] ++, new1.c[k] --;
+                    new2.c[j] ++, new2.c[l] --;
+                    summ += dfs(dep - 1, id_map[new1.c[1]][new1.c[2]][new1.c[3]], id_map[new2.c[1]][new2.c[2]][new2.c[3]]);
+                }
+            }
+            summ /= 9;
+            summ += score(k, l);
+            minn = min(minn, summ);
+        }
+        maxx = max(maxx, minn);
+    }
+    return dp[dep][stat1][stat2] = maxx;
+}
+void intt() {
+    for(int i = 0; i &lt;= 3; ++i) {
+        for(int j = 0; j &lt;= 3 - i; ++j) {
+            int k = 3 - i - j;
+            id_map[i][j][k] = ++idx;
+            rev[idx].c[1] = i, rev[idx].c[2] = j, rev[idx].c[3] = k;
+        }
+    }
+    for(int stat1 = 1; stat1 &lt;= idx; ++stat1)
+        for(int stat2 = 1; stat2 &lt;= idx; ++stat2)
+            dfs(N - 1, stat1, stat2);
+    for(int stat1 = 1; stat1 &lt;= idx; ++stat1)
+        for(int stat2 = 1; stat2 &lt;= idx; ++stat2)
+            avr += dp[N - 1][stat1][stat2] - dp[N - 2][stat1][stat2];
+    // cout &lt;&lt; avr &lt;&lt; endl;
+    avr /= 100;
+}
+void work() {
+    int k;
+    cin &gt;&gt; k;
+    string st1, st2;
+    cin &gt;&gt; st1 &gt;&gt; st2;
+    Cards A, B;
+    memset(A.c, 0, sizeof A.c); memset(B.c, 0, sizeof B.c);
+    for(int i = 0; i &lt; st1.size(); ++i) {
+        if(st1[i] == 'R') A.c[1] ++;
+        if(st1[i] == 'S') A.c[2] ++;
+        if(st1[i] == 'P') A.c[3] ++;
+    }
+    for(int i = 0; i &lt; st2.size(); ++i) {
+        if(st2[i] == 'R') B.c[1] ++;
+        if(st2[i] == 'S') B.c[2] ++;
+        if(st2[i] == 'P') B.c[3] ++;
+    }
+    db ans = dp[min(N - 1, k)][id_map[A.c[1]][A.c[2]][A.c[3]]][id_map[B.c[1]][B.c[2]][B.c[3]]];
+    if(k &gt;= N) {
+        ans += avr * (k - (N - 1));
+    }
+    cout &lt;&lt; fixed &lt;&lt; setprecision(9) &lt;&lt; ans &lt;&lt; endl;
+}
+int main() {
+    ios::sync_with_stdio(), cin.tie();
+    cin &gt;&gt; T;
+    intt();
+    while(T--) work();
+    return 0;
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="/tag/ti-jie/" class="tag">
+                    题解
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="/post/kruskal-chong-gou-shu-xue-xi-bi-ji/">
+                  <h3 class="post-title">
+                    Kruskal 重构树学习笔记
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  <script>console.log("\n%c ✦ Gridea Pro v1.2.2 %c · Theme: simple v1.1.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+</html>
